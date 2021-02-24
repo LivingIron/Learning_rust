@@ -5,19 +5,35 @@ use std::io;
 fn main() {
 
 // you need to make a variable mutable before you can change the value
+    println!("Enter your weight (kg): ");
     let mut input=String::new();
 
+    io::stdin().read_line(&mut input).unwrap();
+    let weight: f32=input.trim().parse().unwrap();
+    
+   // borrow_string(&input);
+   // own_string(input);
 // You can either create 1 mutable reference or many non mutable ones
-    io::stdin().read_line(&mut input);
-    println!("Input : {}", input);
-    let mars_weight = calculate_weight_on_mars(100.0);
+   
+    let mars_weight = calculate_weight_on_mars(weight);
     println!("Weight on Mars : {}kg",mars_weight);
+    
 }
-
 
 fn calculate_weight_on_mars(weight: f32) -> f32{
    (weight/9.81)*3.711
 }
+
+fn borrow_string(s: &String){
+    println!("{}",s);
+}
+
+//when passing reference we just create a pointer to the value instead of granting ownership of the value to s
+
+fn own_string(s: String){
+    println!("{}",s);
+}
+
 
 //1. Each value in rust is owned by a variable
 
